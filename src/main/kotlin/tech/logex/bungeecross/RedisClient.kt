@@ -9,18 +9,15 @@ class RedisClient(
     private val scope: CoroutineScope
 ) {
 
-    init {
-        startLoop()
-    }
-
     private var client: Jedis? = null
     private val _channel: Channel<Message> = Channel<Message>()
     private var _isInitiated: Boolean = false
 
-    private fun startLoop() {
+    fun startLoop() {
         scope.launch {
-            while (startSubscribed && isInitiated) {
-                val t = client!!.brpop("mc")
+            looping = true
+            while (looping && isInitiated) {
+                val t = client!!.brpop(0, "mc")
                 if (t.size != 2) {
                     PluginMain.logger.warning("receive message size invalid")
                     continue
@@ -35,10 +32,11 @@ class RedisClient(
                 val message = Message(temp[0], temp[1])
                 _channel.send(message)
             }
+            looping = false
         }
     }
 
-    var startSubscribed: Boolean = false
+    var looping: Boolean = false
 
     val isInitiated: Boolean
         get() = _isInitiated
@@ -68,6 +66,16 @@ class RedisClient(
             return
         }
         client!!.lpush("qq", msg)
+    }
+
+    fun status(): String {
+        return if (!_isInitiated) {
+            "Not Initiated"
+        } else if (!looping) {
+            "loop not start"
+        } else {
+            client!!.ping()
+        }
     }
 
     data class Message(

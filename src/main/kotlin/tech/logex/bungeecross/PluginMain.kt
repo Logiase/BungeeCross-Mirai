@@ -3,6 +3,7 @@ package tech.logex.bungeecross
 import com.google.auto.service.AutoService
 import kotlinx.coroutines.launch
 import net.mamoe.mirai.Bot
+import net.mamoe.mirai.console.command.CommandManager.INSTANCE.register
 import net.mamoe.mirai.console.plugin.PluginManager.INSTANCE.disable
 import net.mamoe.mirai.console.plugin.jvm.JvmPlugin
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
@@ -20,7 +21,7 @@ object PluginMain : KotlinPlugin(
     }
 ) {
 
-    private val redisClient: RedisClient = RedisClient(this)
+    val redisClient: RedisClient = RedisClient(this)
 
     override fun onEnable() {
         PluginConfig.reload()
@@ -36,6 +37,8 @@ object PluginMain : KotlinPlugin(
             PluginConfig.redisPass
         )
 
+        redisClient.startLoop()
+
         this.launch {
             for (msg in redisClient.channel) {
                 Bot.getInstanceOrNull(PluginConfig.listenBot)?.getGroup(PluginConfig.listenGroup)
@@ -49,6 +52,8 @@ object PluginMain : KotlinPlugin(
                 Unit
             }
         }
+
+        Commands.Status.register()
     }
 
     override fun onDisable() {
