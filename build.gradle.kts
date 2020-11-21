@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.4.10"
     kotlin("kapt") version "1.4.10"
-    id("net.mamoe.mirai-console") version "1.0-RC-1"
+    id("net.mamoe.mirai-console") version "1.0.0"
 }
 
 group = "tech.logex"
@@ -17,7 +17,7 @@ dependencies {
     compileOnly("com.google.auto.service", "auto-service-annotations", autoService)
 
     compileOnly("net.mamoe:mirai-core:1.3.2")
-    compileOnly("net.mamoe:mirai-console:1.0-RC-1")
+    compileOnly("net.mamoe:mirai-console:1.0.0")
 
     implementation("redis.clients", "jedis", "3.3.0")
 
