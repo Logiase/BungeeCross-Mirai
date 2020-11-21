@@ -1,5 +1,7 @@
 # BungeeCross-Mirai
 
+![LICENSE](https://img.shields.io/github/license/Logiase/BungeeCross-Mirai?style=flat-square)
+
 Built for [BungeeCross](https://github.com/keuin/BungeeCross), a BungeeCord plugin aim to chat easily.
 
 BungeeCross-Mirai is a [Mirai-Console](https://github.com/mamoe/mirai-console) plugin for [BungeeCross](https://github.com/keuin/BungeeCross).
@@ -45,5 +47,5 @@ Library used:
 
 Authors:
 
-- @Logiase
-- @keuin
+- [@Logiase](https://github.com/Logiase)
+- [@keuin](https://github.com/keuin)
