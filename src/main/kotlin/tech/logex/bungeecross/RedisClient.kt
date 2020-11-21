@@ -10,7 +10,7 @@ class RedisClient(
 ) {
 
     private var client: Jedis? = null
-    private val _channel: Channel<Message> = Channel<Message>()
+    private val _channel: Channel<Message> = Channel<Message>(Channel.UNLIMITED)
     private var _isInitiated: Boolean = false
 
     fun startLoop() {
