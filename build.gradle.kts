@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.4.10"
     kotlin("kapt") version "1.4.10"
-    id("net.mamoe.mirai-console") version "1.0.0"
+    id("net.mamoe.mirai-console") version "1.1.0"
 }
 
 group = "tech.logex"
